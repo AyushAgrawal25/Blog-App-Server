@@ -53,6 +53,7 @@ router
   });
 
 router.route("/add").post(middleware.checkToken, (req, res) => {
+  console.log("Inside Profile Registration..");
   const profile = Profile({
     username: req.decoded.username,
     name: req.body.name,

@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require('path');
+const fs = require('fs');
 const router = express.Router();
 const BlogPost = require("../models/blogpost.model");
 const middleware = require("../middleware");
@@ -75,6 +77,14 @@ router.route("/delete/:id").delete(middleware.checkToken, (req, res) => {
     (err, result) => {
       if (err) return res.json(err);
       else if (result) {
+        try {
+          let imgPath = path.resolve(result.coverImage);
+          fs.unlinkSync(imgPath);
+          console.log("Deletiong Successful..");
+        }
+        catch (excp) {
+          console.log("Deletion Failed...");
+        }
         console.log(result);
         return res.json("Blog deleted");
       }
