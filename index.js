@@ -37,6 +37,6 @@ app.get('/', (req, res) => {
     data);
 });
 
-app.listen(port, "0.0.0.0", () =>
+app.listen(port, () =>
   console.log(`welcome your listinnig at port ${port}`)
 );
