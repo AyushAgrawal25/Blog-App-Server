@@ -5,6 +5,7 @@ const BlogPost = Schema({
   username: String,
   title: String,
   body: String,
+  category: Number,
   coverImage: {
     type: String,
     default: "",

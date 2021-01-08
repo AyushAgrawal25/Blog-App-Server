@@ -43,6 +43,7 @@ router.route("/Add").post(middleware.checkToken, (req, res) => {
   const blogpost = BlogPost({
     username: req.decoded.username,
     title: req.body.title,
+    category: req.body.catergory,
     body: req.body.body,
   });
   blogpost
