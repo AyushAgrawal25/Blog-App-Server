@@ -81,7 +81,7 @@ router.route("/searchBlogs/:searchText").get(middleware.checkToken, (req, res) =
       var searchedBlogs = [];
       for (var i = 0; i < result.length; i++) {
         if (result[i].title) {
-          if (result[i].title.toLowerCase().includes(req.params.searchText.toLowerCase())) {
+          if ((result[i].title.toLowerCase().includes(req.params.searchText.toLowerCase())) || (result[i].body.toLowerCase().includes(req.params.searchText.toLowerCase()))) {
             searchedBlogs.push(result[i]);
           }
         }
