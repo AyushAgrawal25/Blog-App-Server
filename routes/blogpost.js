@@ -70,6 +70,30 @@ router.route("/getOtherBlog").get(middleware.checkToken, (req, res) => {
   });
 });
 
+router.route("/searchBlogs/:searchText").get(middleware.checkToken, (req, res) => {
+  BlogPost.find({
+    username: { $ne: req.decoded.username }
+  }, (err, result) => {
+    if (err) {
+      return res.json(err);
+    }
+    else {
+      var searchedBlogs = [];
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].title) {
+          if (result[i].title.toLowerCase().includes(req.params.searchText.toLowerCase())) {
+            searchedBlogs.push(result[i]);
+          }
+        }
+      }
+
+      return res.json({
+        data: searchedBlogs
+      });
+    }
+  });
+});
+
 router.route("/delete/:id").delete(middleware.checkToken, (req, res) => {
   BlogPost.findOneAndDelete(
     {
