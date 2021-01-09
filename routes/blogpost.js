@@ -69,6 +69,8 @@ router.route("/getOtherBlog").get(middleware.checkToken, (req, res) => {
   BlogPost.find({ username: { $ne: req.decoded.username } }, (err, result) => {
     if (err) return res.json(err);
     return res.json({ data: result });
+  }).sort({
+    time: -1
   });
 });
 
@@ -93,6 +95,8 @@ router.route("/searchBlogs/:searchText").get(middleware.checkToken, (req, res) =
         data: searchedBlogs
       });
     }
+  }).sort({
+    time: -1
   });
 });
 
