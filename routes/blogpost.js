@@ -60,6 +60,8 @@ router.route("/getOwnBlog").get(middleware.checkToken, (req, res) => {
   BlogPost.find({ username: req.decoded.username }, (err, result) => {
     if (err) return res.json(err);
     return res.json({ data: result });
+  }).sort({
+    time: -1
   });
 });
 
